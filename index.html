@@ -487,8 +487,9 @@ function render() {
 
   // The interaction arrows, named from whatever sits in the system slots.
   // Build items ask both directions; repair items relabel one arrow.
-  const sys = placed["organ system"] || "your system";
-  const partner = placed["partner"] || "second system";
+  // Placed names take "the" so the question reads as a sentence, not a diagram.
+  const sys = placed["organ system"] ? "the " + placed["organ system"] : "your system";
+  const partner = placed["partner"] ? "the " + placed["partner"] : "the second system";
   const arrows = el("arrows");
   if (!arrows.dataset.built) {
     arrows.dataset.built = "1";
