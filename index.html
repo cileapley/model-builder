@@ -299,7 +299,31 @@ finish review, the verdict, and DESIGN.md
 // One config per FRQ. A new item is a new entry here, not new code.
 // The palette mixes words that belong with words that do not.
 const ITEMS = {
+  // The Lesson 06 rehearsal. It builds a model the unit has already taught
+  // (Lesson 05's oxygen-to-a-leg-muscle), because the rehearsal's ten minutes
+  // are for learning the tool, not the biology -- and because the summative's
+  // fr1 was deliberately given an UNTAUGHT function so it measures transfer.
+  // Rehearsing fr1 itself would have destroyed that (2026-09-09 grill, Q1-Q2).
+  rehearsal: {
+    mode: "build",
+    group: "practice",
+    functionName: "getting oxygen to a leg muscle",
+    title: "Build a model: getting oxygen to a leg muscle",
+    directions: "Click a word, then click the box where it belongs. " +
+      "Some words do not belong anywhere. Type what moves along each arrow. " +
+      "Then answer the last question in your own words.",
+    levels: ["cell", "tissue", "organ", "organ system"],
+    partnerLabel: "second system",
+    palette: ["blood", "blood vessel", "circulatory system", "epithelial tissue",
+              "leaf", "muscular system", "neuron", "oxygen", "red blood cell",
+              "stomach"],
+    twoWay: true,
+    prosePrompt: "Why does getting oxygen to a leg muscle need both systems? " +
+      "Write one or two sentences.",
+    proseKey: "why both"
+  },
   fr1: {
+    group: "csa",
     mode: "build",
     functionName: "gas exchange",
     title: "Build a model: gas exchange",
@@ -316,6 +340,7 @@ const ITEMS = {
     proseKey: "why both"
   },
   fr2: {
+    group: "csa",
     mode: "repair",
     functionName: "nutrient uptake",
     title: "Fix a broken model: nutrient uptake",
@@ -342,11 +367,18 @@ const ITEMS = {
 };
 
 const params = new URLSearchParams(location.search);
-const itemKey = ITEMS[params.get("item")] ? params.get("item") : "fr1";
+// DEFAULT_ITEM is a test-day switch. It reads "rehearsal" while the unit is
+// teaching, so a student who opens the bare address lands on the practice model
+// rather than on the summative's. Flip it to "fr1" the morning of the CSA --
+// item 13 tells students to open the builder without naming a tab.
+const DEFAULT_ITEM = "rehearsal";
+const itemKey = ITEMS[params.get("item")] ? params.get("item") : DEFAULT_ITEM;
 const item = ITEMS[itemKey];
 
 // One tab per item, so the page needs no hand-typed address arguments.
-Object.keys(ITEMS).forEach(function (k) {
+Object.keys(ITEMS).filter(function (k) {
+  return ITEMS[k].group === item.group;
+}).forEach(function (k) {
   const a = document.createElement("a");
   a.href = "?item=" + k;
   a.textContent = ITEMS[k].title;
