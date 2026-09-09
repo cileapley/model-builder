@@ -317,9 +317,14 @@ const ITEMS = {
       "Then answer the last question in your own words.",
     levels: ["cell", "tissue", "organ", "organ system"],
     partnerLabel: "second system",
-    palette: ["blood", "blood vessel", "circulatory system", "leaf",
-              "muscular system", "nervous tissue", "neuron", "oxygen",
-              "red blood cell", "stomach"],
+    // Lesson 04's own circulatory chain. The earlier palette ran red blood
+    // cell to blood to blood vessel, which asserts that a vessel is MADE of
+    // blood -- the chain link reads "forms" and nothing composes a vessel
+    // from blood. An artery is composed of smooth muscle tissue, so this
+    // chain obeys the composition rule the criteria demand (2026-09-09).
+    palette: ["artery", "blood", "circulatory system", "leaf",
+              "muscular system", "neuron", "oxygen", "red blood cell",
+              "smooth muscle cell", "smooth muscle tissue", "stomach"],
     twoWay: true,
     prosePrompt: "Why does getting oxygen to a leg muscle need both systems? " +
       "Write one or two sentences.",
