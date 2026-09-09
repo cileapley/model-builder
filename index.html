@@ -304,6 +304,9 @@ const ITEMS = {
   // are for learning the tool, not the biology -- and because the summative's
   // fr1 was deliberately given an UNTAUGHT function so it measures transfer.
   // Rehearsing fr1 itself would have destroyed that (2026-09-09 grill, Q1-Q2).
+  // The tissue decoy is nervous tissue, not epithelial tissue: epithelial
+  // tissue is fr1's correct tissue rung, and a word rehearsed as a trap
+  // should not be the summative's answer four school days later.
   rehearsal: {
     mode: "build",
     group: "practice",
@@ -314,9 +317,9 @@ const ITEMS = {
       "Then answer the last question in your own words.",
     levels: ["cell", "tissue", "organ", "organ system"],
     partnerLabel: "second system",
-    palette: ["blood", "blood vessel", "circulatory system", "epithelial tissue",
-              "leaf", "muscular system", "neuron", "oxygen", "red blood cell",
-              "stomach"],
+    palette: ["blood", "blood vessel", "circulatory system", "leaf",
+              "muscular system", "nervous tissue", "neuron", "oxygen",
+              "red blood cell", "stomach"],
     twoWay: true,
     prosePrompt: "Why does getting oxygen to a leg muscle need both systems? " +
       "Write one or two sentences.",
