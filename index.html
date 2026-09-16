@@ -346,7 +346,7 @@ const ITEMS = {
       "Then answer the last question in your own words.",
     levels: ["cell", "tissue", "organ", "organ system"],
     partnerLabel: "second system",
-    palette: ["alveolar cell", "cardiac muscle tissue", "circulatory system",
+    palette: ["alveolar cell (lung cell)", "cardiac muscle tissue", "circulatory system",
               "epithelial tissue", "lung", "mitochondrion", "nerve", "oxygen",
               "red blood cell", "respiratory system", "small intestine"],
     twoWay: true,
@@ -539,7 +539,7 @@ function render() {
   // The interaction arrows, named from whatever sits in the system slots.
   // Build items ask both directions; repair items relabel one arrow.
   // Placed names take "the" so the question reads as a sentence, not a diagram.
-  const sys = placed["organ system"] ? "the " + placed["organ system"] : "your system";
+  const sys = placed["organ system"] ? "the " + placed["organ system"] : "the original system";
   const partner = placed["partner"] ? "the " + placed["partner"] : "the second system";
   const arrows = el("arrows");
   if (!arrows.dataset.built) {
