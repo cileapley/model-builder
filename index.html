@@ -335,6 +335,12 @@ const ITEMS = {
     mode: "build",
     functionName: "gas exchange",
     title: "Build a model: gas exchange",
+    // Added 2026-09-16 on the teacher's word: say what the gases are. It
+    // names no structure and no second system, so the item still measures
+    // transfer (the 08-17 grill chose an untaught function on purpose).
+    about: "Gas exchange means taking in oxygen and getting rid of carbon " +
+      "dioxide. Every cell in your body needs oxygen, and every cell makes " +
+      "carbon dioxide it must get rid of.",
     directions: "Click a word, then click the box where it belongs. " +
       "Some words do not belong anywhere. Type what moves along each arrow. " +
       "Then answer the last question in your own words.",
@@ -352,6 +358,11 @@ const ITEMS = {
     mode: "repair",
     functionName: "nutrient uptake",
     title: "Fix a broken model: nutrient uptake",
+    // Added 2026-09-16 on the teacher's word: "nutrient uptake" as a phrase
+    // is too conceptual on its own. Names nothing the broken model does not.
+    about: "Nutrient uptake means moving the nutrients from digested food " +
+      "out of the small intestine and into the rest of the body, so every " +
+      "cell gets what it needs to live and grow.",
     directions: "Read the student model below. It has three mistakes. " +
       "Build the model the way it should be. Type what moves along the arrow. " +
       "Then name each mistake in the last box.",
@@ -402,7 +413,7 @@ let justPlaced = null;
 
 const el = function (id) { return document.getElementById(id); };
 el("title").textContent = item.title;
-el("directions").textContent = item.directions;
+el("directions").textContent = (item.about ? item.about + " " : "") + item.directions;
 el("prose-label").textContent = item.prosePrompt;
 if (item.modelHeading) el("model-heading").textContent = item.modelHeading;
 
