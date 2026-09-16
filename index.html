@@ -379,7 +379,7 @@ const params = new URLSearchParams(location.search);
 // teaching, so a student who opens the bare address lands on the practice model
 // rather than on the summative's. Flip it to "fr1" the morning of the CSA --
 // item 13 tells students to open the builder without naming a tab.
-const DEFAULT_ITEM = "rehearsal";
+const DEFAULT_ITEM = "fr1";
 const itemKey = ITEMS[params.get("item")] ? params.get("item") : DEFAULT_ITEM;
 const item = ITEMS[itemKey];
 
