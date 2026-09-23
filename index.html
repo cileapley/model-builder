@@ -383,6 +383,73 @@ const ITEMS = {
     twoWay: false,
     prosePrompt: "Name the three mistakes in the student model. Say why each one is a mistake.",
     proseKey: "mistakes"
+  },
+  // The Friday 9/25 reassessment (Form B), ruled in
+  // docs/2026-09-23-gle-reassessment-form-b-grill.md. Its own group, so a
+  // student on a retake tab never sees Form A's tabs. Each bank carries five
+  // more near-miss words than Form A's -- words that belong to the biology
+  // but not to this model -- on the teacher's word (Q4).
+  fr1b: {
+    group: "retake",
+    mode: "build",
+    functionName: "waste removal",
+    title: "Build a model: removing wastes from the blood",
+    // Untaught on purpose, like fr1, so it measures transfer. Respiratory
+    // system is kept out of the bank: it also clears a waste from the blood,
+    // which would make the partner answer arguable.
+    about: "Every cell in your body makes wastes, and those wastes go into " +
+      "the blood. Your body has to take the wastes out of the blood and get " +
+      "rid of them.",
+    directions: "Click a word, then click the box where it belongs. " +
+      "Some words do not belong anywhere. Type what moves along each arrow. " +
+      "Then answer the last question in your own words.",
+    levels: ["cell", "tissue", "organ", "organ system"],
+    partnerLabel: "second system",
+    palette: ["bladder", "cardiac muscle tissue", "circulatory system",
+              "digestive system", "epithelial tissue", "kidney",
+              "kidney tubule cell (kidney cell)", "lung", "mitochondrion",
+              "nerve", "nucleus", "red blood cell", "smooth muscle tissue",
+              "urea (a waste)", "urinary system", "urine"],
+    twoWay: true,
+    prosePrompt: "Why does removing wastes from the blood need both systems? " +
+      "Write one or two sentences.",
+    proseKey: "why both"
+  },
+  fr2b: {
+    group: "retake",
+    mode: "repair",
+    functionName: "movement in response to a stimulus",
+    title: "Fix a broken model: movement in response to a stimulus",
+    // Not "a hot pan": that was Form A item 8's context.
+    about: "A stimulus is something your body senses, like stepping on " +
+      "something sharp. Movement in response to a stimulus means your body " +
+      "moves because of it.",
+    directions: "Read the student model below. It has three mistakes. " +
+      "Build the model the way it should be. Type what moves along the arrow. " +
+      "Then name each mistake in the last box.",
+    // Three mistakes, the same kinds as fr2's: a cell part at the cell level,
+    // the organ system level missing, and an unlabeled arrow.
+    broken: {
+      heading: "The student model",
+      rows: [["cell", "a nucleus"],
+             ["tissue", "nervous tissue"],
+             ["organ", "a nerve"]],
+      arrowText: "then an arrow with no label, drawn to the muscular system"
+    },
+    modelHeading: "Your fixed model",
+    levels: ["cell", "tissue", "organ", "organ system"],
+    partnerLabel: "second system",
+    // brain and sensory receptor were in the accepted draft and came out:
+    // neuron -> nervous tissue -> brain -> nervous system is a correct chain,
+    // and a sensory receptor can be read as a cell. A decoy that is a right
+    // answer is not a decoy (grill Q4).
+    palette: ["blood", "digestive system", "heart", "hormone",
+              "muscle tissue", "muscular system", "nerve", "nervous system",
+              "nervous tissue", "neuron", "nucleus", "signal",
+              "skeletal muscle cell", "skeletal system", "tendon"],
+    twoWay: false,
+    prosePrompt: "Name the three mistakes in the student model. Say why each one is a mistake.",
+    proseKey: "mistakes"
   }
 };
 
