@@ -418,36 +418,43 @@ const ITEMS = {
   fr2b: {
     group: "retake",
     mode: "repair",
-    functionName: "movement in response to a stimulus",
-    title: "Fix a broken model: movement in response to a stimulus",
-    // Not "a hot pan": that was Form A item 8's context.
-    about: "A stimulus is something your body senses, like stepping on " +
-      "something sharp. Movement in response to a stimulus means your body " +
-      "moves because of it.",
+    functionName: "bending your arm",
+    title: "Fix a broken model: bending your arm",
+    // Was movement in response to a stimulus until 2026-09-23 evening: its
+    // answer chain (neuron, nervous tissue, nerve, nervous system, signal to
+    // the muscular system) is printed in Form A item 10's stem, so every
+    // reassessor had read it. Bending the arm is on no paper as a model;
+    // Form A items 8 and 11 use the hot-pan withdrawal with the nervous
+    // system as partner, which is why the scoring note rules on that swap.
+    about: "Bending your arm means the biceps, a muscle in your upper arm, " +
+      "pulls on your bones and moves them.",
+    // Nothing travels from muscle to bone, so this item does not ask what
+    // "moves along the arrow" the way fr2 does.
     directions: "Read the student model below. It has three mistakes. " +
-      "Build the model the way it should be. Type what moves along the arrow. " +
-      "Then name each mistake in the last box.",
+      "Build the model the way it should be. On the arrow, type what the " +
+      "muscular system does to the skeletal system. Then name each mistake " +
+      "in the last box.",
     // Three mistakes, the same kinds as fr2's: a cell part at the cell level,
     // the organ system level missing, and an unlabeled arrow.
     broken: {
       heading: "The student model",
       rows: [["cell", "a nucleus"],
-             ["tissue", "nervous tissue"],
-             ["organ", "a nerve"]],
-      arrowText: "then an arrow with no label, drawn to the muscular system"
+             ["tissue", "skeletal muscle tissue"],
+             ["organ", "the biceps"]],
+      arrowText: "then an arrow with no label, drawn to the skeletal system"
     },
     modelHeading: "Your fixed model",
     levels: ["cell", "tissue", "organ", "organ system"],
     partnerLabel: "second system",
-    // brain and sensory receptor were in the accepted draft and came out:
-    // neuron -> nervous tissue -> brain -> nervous system is a correct chain,
-    // and a sensory receptor can be read as a cell. A decoy that is a right
-    // answer is not a decoy (grill Q4).
-    palette: ["blood", "digestive system", "heart", "hormone",
-              "muscle tissue", "muscular system", "nerve", "nervous system",
-              "nervous tissue", "neuron", "nucleus", "signal",
-              "skeletal muscle cell", "skeletal system", "tendon"],
+    // Near misses: the wrong muscle type (smooth), the wrong system's tissue
+    // (bone), the cord that joins muscle to bone (tendon), a partner that
+    // signals rather than moves (nervous system), and an arrow word (signal).
+    palette: ["biceps", "blood", "bone tissue", "digestive system", "heart",
+              "muscular system", "nervous system", "nucleus", "red blood cell",
+              "signal", "skeletal muscle cell", "skeletal muscle tissue",
+              "skeletal system", "smooth muscle tissue", "tendon"],
     twoWay: false,
+    arrowPrompt: "What does {sys} do to {partner}?",
     prosePrompt: "Name the three mistakes in the student model. Say why each one is a mistake.",
     proseKey: "mistakes"
   }
@@ -627,6 +634,11 @@ function render() {
   if (item.twoWay) {
     el("a1-label").textContent = "What moves from " + sys + " to " + partner + "?";
     el("a2-label").textContent = "What moves from " + partner + " to " + sys + "?";
+  } else if (item.arrowPrompt) {
+    // An item where nothing travels (a muscle pulling a bone) asks its own
+    // question; {sys} and {partner} take the placed names.
+    el("a1-label").textContent =
+      item.arrowPrompt.replace("{sys}", sys).replace("{partner}", partner);
   } else {
     el("a1-label").textContent =
       "What moves along the arrow from " + sys + " to " + partner + "?";
