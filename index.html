@@ -432,8 +432,8 @@ const ITEMS = {
     // "moves along the arrow" the way fr2 does.
     directions: "Read the student model below. It has three mistakes. " +
       "Build the model the way it should be. On the arrow, type what the " +
-      "muscular system does to the skeletal system. Then name each mistake " +
-      "in the last box.",
+      "organ system in your model does to the skeletal system. Then name " +
+      "each mistake in the last box.",
     // Three mistakes, the same kinds as fr2's: a cell part at the cell level,
     // the organ system level missing, and an unlabeled arrow.
     broken: {
@@ -464,8 +464,9 @@ const params = new URLSearchParams(location.search);
 // DEFAULT_ITEM is a test-day switch. It reads "rehearsal" while the unit is
 // teaching, so a student who opens the bare address lands on the practice model
 // rather than on the summative's. Flip it to "fr1" the morning of the CSA --
-// item 13 tells students to open the builder without naming a tab.
-const DEFAULT_ITEM = "fr1";
+// item 13 tells students to open the builder without naming a tab. Reads
+// "fr1b" for the Form B reassessment day (2026-09-25); back to "fr1" after.
+const DEFAULT_ITEM = "fr1b";
 const itemKey = ITEMS[params.get("item")] ? params.get("item") : DEFAULT_ITEM;
 const item = ITEMS[itemKey];
 
@@ -705,12 +706,29 @@ function fallbackCopy() {
 }
 
 el("reset").addEventListener("click", function () {
+  if (hasWork() && !confirm("Clear your whole model and start over?")) return;
   slots.forEach(function (s) { placed[s] = null; });
   selectedChip = null;
   el("a1").value = "";
   if (el("a2")) el("a2").value = "";
   el("prose").value = "";
   render();
+});
+
+// Work lives only in this page. Warn before leaving with a model that has
+// changed since the last Copy, so a stray tab click or refresh cannot lose it.
+let copiedSinceChange = false;
+function hasWork() {
+  if (Object.values(placed).some(Boolean)) return true;
+  return Array.prototype.some.call(document.querySelectorAll("input, textarea"),
+    function (f) { return f.value.trim() !== ""; });
+}
+document.addEventListener("input", function () { copiedSinceChange = false; });
+document.addEventListener("click", function (e) {
+  copiedSinceChange = !!e.target.closest("#copy") || (copiedSinceChange && !e.target.closest("button, .slot, .chip"));
+}, true);
+window.addEventListener("beforeunload", function (e) {
+  if (hasWork() && !copiedSinceChange) { e.preventDefault(); e.returnValue = ""; }
 });
 
 render();
