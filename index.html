@@ -466,7 +466,7 @@ const params = new URLSearchParams(location.search);
 // rather than on the summative's. Flip it to "fr1" the morning of the CSA --
 // item 13 tells students to open the builder without naming a tab. Reads
 // "fr1b" for the Form B reassessment day (2026-09-25); back to "fr1" after.
-const DEFAULT_ITEM = "fr1b";
+const DEFAULT_ITEM = "fr1";
 const itemKey = ITEMS[params.get("item")] ? params.get("item") : DEFAULT_ITEM;
 const item = ITEMS[itemKey];
 
