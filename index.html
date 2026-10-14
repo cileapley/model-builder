@@ -81,6 +81,8 @@
     text-wrap: balance;
   }
   .directions { margin: 0 0 1.6rem; max-width: 62ch; }
+  .directions.steps { padding-left: 1.4rem; }
+  .directions.steps li { margin-bottom: .35rem; }
 
   h2 {
     font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
@@ -457,6 +459,73 @@ const ITEMS = {
     arrowPrompt: "What does {sys} do to {partner}?",
     prosePrompt: "Name the three mistakes in the student model. Say why each one is a mistake.",
     proseKey: "mistakes"
+  },
+  // The Thu 10/15 retake day (Form C,
+  // gle/unit-1-1-organization-in-organisms/assessments/organization-in-organisms-form-c-assessment.md).
+  // Its own group, so a Form C student never sees Form B's tabs. Directions are
+  // `steps`, shown as a numbered list.
+  fr1c: {
+    group: "retake2",
+    mode: "build",
+    functionName: "cooling down",
+    title: "Build a model: cooling down by sweating",
+    // Untaught on purpose, like fr1 and fr1b. The nervous, muscular and
+    // respiratory systems are kept out of the bank: each has a real part in
+    // cooling, which would make the partner answer arguable.
+    about: "Your body cools itself by sweating. Sweat glands in your skin " +
+      "release sweat, and as the sweat dries it carries heat away. Most of " +
+      "your body's heat is made deep inside you.",
+    steps: ["Click a word in the word bank, then click the box where it belongs. " +
+              "Fill the four boxes from cell up to organ system. Some words do not belong.",
+            "Put the second system that works with the skin in the fifth box, labeled second system.",
+            "Type what moves along each arrow, in both directions.",
+            "Answer the last question in one or two sentences.",
+            "Press Copy my model. Go back to the quiz, click in the answer box, and press Ctrl + V."],
+    directions: "",
+    levels: ["cell", "tissue", "organ", "organ system"],
+    partnerLabel: "second system",
+    palette: ["bone tissue", "cardiac muscle tissue", "circulatory system",
+              "digestive system", "epithelial tissue", "heart",
+              "integumentary system (skin system)", "lung", "mitochondrion",
+              "nucleus", "red blood cell", "skeletal system", "skin",
+              "smooth muscle tissue", "sweat (water and salt)", "sweat gland cell"],
+    twoWay: true,
+    prosePrompt: "Why does cooling down need both systems? Write one or two sentences.",
+    proseKey: "why both"
+  },
+  fr2c: {
+    group: "retake2",
+    mode: "repair",
+    functionName: "a hormone from the thyroid",
+    title: "Fix a broken model: a hormone from the thyroid",
+    about: "Your thyroid is a small organ in your neck. It makes a hormone, a " +
+      "chemical message that the blood carries to cells all over your body.",
+    steps: ["Read the student model. It has three mistakes: look at each level and at the arrow.",
+            "Build the model the way it should be: click a word, then click its box. " +
+              "Put a real structure at every level.",
+            "Type what moves along the arrow.",
+            "In the last text box, name each mistake and say why it is a mistake.",
+            "Press Copy my model. Go back to the quiz, click in the answer box, and press Ctrl + V."],
+    directions: "",
+    // Three mistakes, the same kinds as fr2 and fr2b: a cell part at the cell
+    // level, the organ system level missing, and an unlabeled arrow.
+    broken: {
+      heading: "The student model",
+      rows: [["cell", "a cell membrane"],
+             ["tissue", "epithelial tissue"],
+             ["organ", "the thyroid"]],
+      arrowText: "then an arrow with no label, drawn to the circulatory system"
+    },
+    modelHeading: "Your fixed model",
+    levels: ["cell", "tissue", "organ", "organ system"],
+    partnerLabel: "second system",
+    palette: ["brain", "cell membrane", "circulatory system", "digestive system",
+              "endocrine system (hormone system)", "epithelial tissue", "heart",
+              "nervous system", "oxygen", "red blood cell", "smooth muscle tissue",
+              "thyroid", "thyroid cell"],
+    twoWay: false,
+    prosePrompt: "Name the three mistakes in the student model. Say why each one is a mistake.",
+    proseKey: "mistakes"
   }
 };
 
@@ -489,7 +558,22 @@ let justPlaced = null;
 
 const el = function (id) { return document.getElementById(id); };
 el("title").textContent = item.title;
-el("directions").textContent = (item.about ? item.about + " " : "") + item.directions;
+// An item with `steps` shows its "about" as its own paragraph and the steps as
+// a numbered list: Form C's directions, after students read Form B's one run-on
+// paragraph as vague (teacher, 2026-10-14). Older items keep the paragraph.
+if (item.steps) {
+  el("directions").textContent = item.about || "";
+  const ol = document.createElement("ol");
+  ol.className = "directions steps";
+  item.steps.forEach(function (s) {
+    const li = document.createElement("li");
+    li.textContent = s;
+    ol.appendChild(li);
+  });
+  el("directions").after(ol);
+} else {
+  el("directions").textContent = (item.about ? item.about + " " : "") + item.directions;
+}
 el("prose-label").textContent = item.prosePrompt;
 if (item.modelHeading) el("model-heading").textContent = item.modelHeading;
 
