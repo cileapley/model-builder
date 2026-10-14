@@ -162,6 +162,9 @@
   .chain-link .tick { border-left: 1px solid var(--ink-soft); height: 100%; }
   .chain-link.valley .tick { border-left-style: dashed; }
   .chain-link .rel { font-size: .78rem; font-style: italic; color: var(--ink-soft); }
+  .chain-link.explained { height: auto; min-height: 1.15rem; padding-top: .2rem; padding-bottom: .2rem; }
+  .chain-link.explained .tick { align-self: stretch; height: auto; }
+  .chain-link.explained .rel { font-size: .85rem; color: var(--ink); }
 
   .arrow-row { margin: .9rem 0; }
   .arrow-row label, .prose-label { display: block; font-size: .95rem; margin-bottom: .35rem; }
@@ -283,8 +286,9 @@ finish review, the verdict, and DESIGN.md
       <h2>Your answer</h2>
       <div id="answer-panel">
         <div id="answer-head">Tear-out sheet</div>
-        <p id="answer-note">This sheet fills in as you work. When you finish,
-          copy it and paste it into the quiz answer box.</p>
+        <p id="answer-note">Your answer is written here for you as you work. You
+          do not type in this box. When you finish, press Copy my model and paste
+          it into the quiz answer box.</p>
         <div id="output"></div>
       </div>
       <div class="buttons">
@@ -329,6 +333,7 @@ const ITEMS = {
               "muscular system", "neuron", "oxygen", "red blood cell",
               "smooth muscle cell", "smooth muscle tissue", "stomach"],
     twoWay: true,
+    explainLinks: true,
     prosePrompt: "Why does getting oxygen to a leg muscle need both systems? " +
       "Write one or two sentences.",
     proseKey: "why both"
@@ -464,70 +469,109 @@ const ITEMS = {
   // gle/unit-1-1-organization-in-organisms/assessments/organization-in-organisms-form-c-assessment.md).
   // Its own group, so a Form C student never sees Form B's tabs. Directions are
   // `steps`, shown as a numbered list.
+  // Rewritten 2026-10-14 evening on the teacher's word: sweating and the
+  // thyroid read as "vague and unconnected to the idea of levels of
+  // organization" ("why isn't blood in the mix?"). Both now use familiar,
+  // taught organs, the story names the job and the parts, and every link
+  // between levels is spelled out (explainLinks). The item measures the
+  // levels and the interaction, not transfer to an untaught organ.
   fr1c: {
     group: "retake2",
     mode: "build",
-    functionName: "cooling down",
-    title: "Build a model: cooling down by sweating",
-    // Untaught on purpose, like fr1 and fr1b. The nervous, muscular and
-    // respiratory systems are kept out of the bank: each has a real part in
-    // cooling, which would make the partner answer arguable.
-    about: "Your body cools itself by sweating. Sweat glands in your skin " +
-      "release sweat, and as the sweat dries it carries heat away. Most of " +
-      "your body's heat is made deep inside you.",
-    steps: ["Click a word in the word bank, then click the box where it belongs. " +
-              "Fill the four boxes from cell up to organ system. Some words do not belong.",
-            "Put the second system that works with the skin in the fifth box, labeled second system.",
-            "Type what moves along each arrow, in both directions.",
-            "Answer the last question in one or two sentences.",
-            "Press Copy my model. Go back to the quiz, click in the answer box, and press Ctrl + V."],
+    functionName: "pumping blood",
+    title: "Build a model: your heart pumping blood",
+    about: "Your heart is a pump. Its walls are made of heart muscle cells. " +
+      "When those cells squeeze together, the heart pushes blood through your " +
+      "body. The blood carries oxygen to every cell and carries carbon dioxide " +
+      "away. The blood picks up its oxygen, and drops off its carbon dioxide, " +
+      "each time it passes through your lungs.",
+    steps: ["Fill boxes 01 to 04, from the smallest level to the largest: cell, " +
+              "tissue, organ, organ system. Click a word in the word bank, then click its box. " +
+              "The heart's own cells go in box 01, and each box below is built from the box " +
+              "above it. Some words do not belong.",
+            "Box 04 holds the system the heart belongs to. In box 05, put the second system: " +
+              "the system the blood visits to pick up oxygen.",
+            "Answer the two arrow questions. Each one asks for a gas.",
+            "Answer the last question in two sentences.",
+            "Press Copy my model. Go back to the Canvas tab, click in the answer box for " +
+              "this question, and press Ctrl + V."],
     directions: "",
     levels: ["cell", "tissue", "organ", "organ system"],
     partnerLabel: "second system",
-    palette: ["bone tissue", "cardiac muscle tissue", "circulatory system",
-              "digestive system", "epithelial tissue", "heart",
-              "integumentary system (skin system)", "lung", "mitochondrion",
-              "nucleus", "red blood cell", "skeletal system", "skin",
-              "smooth muscle tissue", "sweat (water and salt)", "sweat gland cell"],
+    // Decoys: a cell part (nucleus), a cell that does not build the heart
+    // (red blood cell), tissues of other organs, another organ, and systems
+    // that do not load oxygen. "Blood" is kept out: it is itself a tissue,
+    // which would make the tissue slot arguable. "Lung" is kept out so the
+    // partner slot can only hold a system.
+    palette: ["bone tissue", "circulatory system", "digestive system",
+              "heart", "heart muscle cell", "heart muscle tissue",
+              "nervous system", "nucleus", "red blood cell",
+              "respiratory system", "skeletal muscle tissue", "stomach"],
     twoWay: true,
-    prosePrompt: "Why does cooling down need both systems? Write one or two sentences.",
+    // Both arrows name the gas, so "blood" is not read as the answer.
+    arrowPrompts: ["What gas does the blood carry from {sys} to {partner}?",
+                   "What gas does {partner} put into the blood for {sys} to carry?"],
+    explainLinks: true,
+    prosePrompt: "Write two sentences. First: what job does your box 04 system do for " +
+      "your cells? Second: what job does your box 05 system do that box 04 cannot?",
     proseKey: "why both"
   },
   fr2c: {
     group: "retake2",
     mode: "repair",
-    functionName: "a hormone from the thyroid",
-    title: "Fix a broken model: a hormone from the thyroid",
-    about: "Your thyroid is a small organ in your neck. It makes a hormone, a " +
-      "chemical message that the blood carries to cells all over your body.",
-    steps: ["Read the student model. It has three mistakes: look at each level and at the arrow.",
-            "Build the model the way it should be: click a word, then click its box. " +
-              "Put a real structure at every level.",
-            "Type what moves along the arrow.",
-            "In the last text box, name each mistake and say why it is a mistake.",
-            "Press Copy my model. Go back to the quiz, click in the answer box, and press Ctrl + V."],
+    functionName: "kicking a ball",
+    title: "Fix a broken model: kicking a ball",
+    about: "To kick a ball, your brain decides to move. It sends a signal, an " +
+      "electrical message, along your nerves to the muscles in your leg. The " +
+      "signal tells the leg muscles to pull, and your leg swings.",
+    steps: ["Read the student's model below. It has three mistakes. Two of its rows are " +
+              "correct. Check that each row holds the right kind of thing, look for a " +
+              "level that is missing, and check the arrow.",
+            "Build the fixed model: click a word, then click its box. Follow the signal " +
+              "back to where it starts: the brain's own cells, tissue and organ go in " +
+              "boxes 01 to 03, and the system they belong to goes in box 04. The muscular " +
+              "system goes in box 05.",
+            "Answer the arrow question: what travels from box 04 to the muscles?",
+            "In the last box, write three sentences, one for each mistake. Each sentence " +
+              "says what was wrong and why it is wrong.",
+            "Press Copy my model. Go back to the Canvas tab, click in the answer box for " +
+              "this question, and press Ctrl + V."],
     directions: "",
     // Three mistakes, the same kinds as fr2 and fr2b: a cell part at the cell
     // level, the organ system level missing, and an unlabeled arrow.
     broken: {
       heading: "The student model",
-      rows: [["cell", "a cell membrane"],
-             ["tissue", "epithelial tissue"],
-             ["organ", "the thyroid"]],
-      arrowText: "then an arrow with no label, drawn to the circulatory system"
+      rows: [["cell", "a nucleus"],
+             ["tissue", "nervous tissue"],
+             ["organ", "the brain"]],
+      arrowText: "then an arrow with no label, drawn from the brain to the muscular system"
     },
     modelHeading: "Your fixed model",
     levels: ["cell", "tissue", "organ", "organ system"],
     partnerLabel: "second system",
-    palette: ["brain", "cell membrane", "circulatory system", "digestive system",
-              "endocrine system (hormone system)", "epithelial tissue", "heart",
-              "nervous system", "oxygen", "red blood cell", "smooth muscle tissue",
-              "thyroid", "thyroid cell"],
+    // "Spinal cord" and "nerve" are kept out: each is a real nervous-system
+    // organ, which would make the organ slot arguable.
+    palette: ["blood", "bone", "brain", "circulatory system", "heart",
+              "muscular system", "nervous system", "nervous tissue",
+              "neuron (nerve cell)", "nucleus", "skeletal muscle tissue",
+              "skeletal system"],
     twoWay: false,
-    prosePrompt: "Name the three mistakes in the student model. Say why each one is a mistake.",
+    explainLinks: true,
+    prosePrompt: "Write three sentences, one for each mistake in the student model. " +
+      "Each sentence says what was wrong and why it is wrong.",
     proseKey: "mistakes"
   }
 };
+
+// What each link in the chain means, spelled out for items with
+// `explainLinks` (teacher, 2026-10-14: the bare word "forms" left the
+// connection between levels too easy to misread).
+const LINKS = [
+  "many cells like this join to form the tissue below",
+  "this tissue joins with other tissues to form the organ below",
+  "this organ works as a team with other organs to form the organ system below",
+  "this system works with a second system: something moves between them"
+];
 
 const params = new URLSearchParams(location.search);
 // DEFAULT_ITEM is a test-day switch. It reads "rehearsal" while the unit is
@@ -657,7 +701,8 @@ function render() {
       link.className = "chain-link" + (s === "partner" ? " valley" : "");
       const tick = document.createElement("span"); tick.className = "tick";
       const rel = document.createElement("span"); rel.className = "rel";
-      rel.textContent = (s === "partner") ? "works with" : "forms";
+      rel.textContent = item.explainLinks ? LINKS[i - 1] : (s === "partner") ? "works with" : "forms";
+      if (item.explainLinks) link.classList.add("explained");
       link.appendChild(tick); link.appendChild(rel);
       sc.appendChild(link);
     }
@@ -699,8 +744,10 @@ function render() {
   // The interaction arrows, named from whatever sits in the system slots.
   // Build items ask both directions; repair items relabel one arrow.
   // Placed names take "the" so the question reads as a sentence, not a diagram.
-  const sys = placed["organ system"] ? "the " + placed["organ system"] : "the original system";
-  const partner = placed["partner"] ? "the " + placed["partner"] : "the second system";
+  const sys = placed["organ system"] ? "the " + placed["organ system"] :
+    item.explainLinks ? "your box 04 system" : "the original system";
+  const partner = placed["partner"] ? "the " + placed["partner"] :
+    item.explainLinks ? "your box 05 system" : "the second system";
   const arrows = el("arrows");
   if (!arrows.dataset.built) {
     arrows.dataset.built = "1";
@@ -716,7 +763,11 @@ function render() {
       arrows.appendChild(row);
     });
   }
-  if (item.twoWay) {
+  if (item.arrowPrompts) {
+    const fill = function (t) { return t.replace("{sys}", sys).replace("{partner}", partner); };
+    el("a1-label").textContent = fill(item.arrowPrompts[0]);
+    el("a2-label").textContent = fill(item.arrowPrompts[1]);
+  } else if (item.twoWay) {
     el("a1-label").textContent = "What moves from " + sys + " to " + partner + "?";
     el("a2-label").textContent = "What moves from " + partner + " to " + sys + "?";
   } else if (item.arrowPrompt) {
@@ -738,7 +789,7 @@ function updateOutput() {
   item.levels.forEach(function (s) {
     lines.push(s + ": " + (placed[s] || "(empty)"));
   });
-  lines.push("partner: " + partner);
+  lines.push((item.explainLinks ? "second system: " : "partner: ") + partner);
   lines.push("arrow " + sys + "->" + partner + ": " + (el("a1").value.trim() || "(empty)"));
   if (item.twoWay) {
     lines.push("arrow " + partner + "->" + sys + ": " + (el("a2").value.trim() || "(empty)"));
