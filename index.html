@@ -319,9 +319,9 @@ const ITEMS = {
     group: "practice",
     functionName: "getting oxygen to a leg muscle",
     title: "Build a model: getting oxygen to a leg muscle",
-    directions: "Click a word, then click the box where it belongs. " +
-      "Some words do not belong anywhere. Type what moves along each arrow. " +
-      "Then answer the last question in your own words.",
+    directions: "Click a word. Then click the box where it belongs. " +
+      "Some words do not belong anywhere. Next, type what moves along each arrow. " +
+      "Last, answer the final question in your own words.",
     levels: ["cell", "tissue", "organ", "organ system"],
     partnerLabel: "second system",
     // Lesson 04's own circulatory chain. The earlier palette ran red blood
@@ -334,7 +334,7 @@ const ITEMS = {
               "smooth muscle cell", "smooth muscle tissue", "stomach"],
     twoWay: true,
     explainLinks: true,
-    prosePrompt: "Why does getting oxygen to a leg muscle need both systems? " +
+    prosePrompt: "Why does a leg muscle need both systems to get its oxygen? " +
       "Write one or two sentences.",
     proseKey: "why both"
   },
@@ -483,20 +483,27 @@ const ITEMS = {
     // 2026-10-14 late: the teacher found the first rewrite gave "a bit too
     // much away" -- the goal stays clear, the particulars (the heart's cell,
     // the lungs) are the student's to supply.
-    about: "Your heart is a pump that pushes blood through your body. The " +
-      "blood carries oxygen to every cell and carries carbon dioxide away. " +
-      "To do that, the blood has to pass through a second organ system, " +
-      "where it picks up oxygen and gets rid of carbon dioxide.",
-    steps: ["Build the heart's model in boxes 01 to 04, from the smallest level to the " +
-              "largest: cell, tissue, organ, organ system. Click a word in the word bank, " +
-              "then click its box. Each box is built from the box above it. Some words do " +
-              "not belong.",
-            "In box 05, put the second system: the one the blood passes through to pick " +
-              "up oxygen.",
-            "Answer the two arrow questions. Each one asks for a gas.",
-            "Answer the last question in two sentences.",
-            "Press Copy my model. Go back to the Canvas tab, click in the answer box for " +
-              "this question, and press Ctrl + V."],
+    // 2026-10-14 night: reworded to about a 7th-grade level. The about text and
+    // the steps are word for word the Canvas stem of Form C item 13.
+    about: "Your heart is a pump. It pushes blood all through your body. The " +
+      "blood brings oxygen to every cell. It also carries carbon dioxide, a " +
+      "waste gas, away from every cell. To do this, the blood has to pass " +
+      "through a second organ system. There, the blood picks up oxygen and " +
+      "gets rid of carbon dioxide.",
+    steps: ["Build the heart's model in boxes 01 to 04. Go from the smallest level to " +
+              "the largest: cell, tissue, organ, organ system. Click a word in the word " +
+              "bank, then click its box. Each box is built from the box above it. For " +
+              "example, the tissue in box 02 is made of many cells like the one in box " +
+              "01. Some words do not belong.",
+            "In box 05, put the second system. This is the system the blood passes " +
+              "through to pick up oxygen.",
+            "Answer the two arrow questions in the Model Builder. Each question asks " +
+              "for a gas.",
+            "Answer the last question in two sentences. First sentence: What job does " +
+              "your box 04 system do for your cells? Second sentence: What job does your " +
+              "box 05 system do that box 04 cannot do?",
+            "Press Copy my model. Then go back to the Canvas quiz. Click in the answer " +
+              "box for this question. Then press Ctrl + V."],
     directions: "",
     levels: ["cell", "tissue", "organ", "organ system"],
     partnerLabel: "second system",
@@ -514,8 +521,9 @@ const ITEMS = {
     arrowPrompts: ["What gas does the blood carry from {sys} to {partner}?",
                    "What gas does {partner} put into the blood for {sys} to carry?"],
     explainLinks: true,
-    prosePrompt: "Write two sentences. First: what job does your box 04 system do for " +
-      "your cells? Second: what job does your box 05 system do that box 04 cannot?",
+    prosePrompt: "Write two sentences. First sentence: What job does your box 04 " +
+      "system do for your cells? Second sentence: What job does your box 05 " +
+      "system do that box 04 cannot do?",
     proseKey: "why both"
   },
   fr2c: {
@@ -523,18 +531,22 @@ const ITEMS = {
     mode: "repair",
     functionName: "kicking a ball",
     title: "Fix a broken model: kicking a ball",
+    // 2026-10-14 night: reworded to about a 7th-grade level. The about text and
+    // the steps are word for word the Canvas stem of Form C item 14.
     about: "To kick a ball, the muscles in your leg pull on your leg bones. " +
       "Your brain controls when those muscles pull.",
-    steps: ["Read the student's model below. It has three mistakes. A complete model " +
-              "has one correct structure at every level from cell to organ system, and " +
-              "an arrow to the second system that says what moves along it.",
-            "Build the fixed model: click a word, then click its box. Boxes 01 to 04 go " +
+    steps: ["Read the student's model in the Model Builder. It has three mistakes. A " +
+              "complete model has one correct structure for each level. A structure is " +
+              "a real part of the body. The levels go from cell to organ system. A " +
+              "complete model also has an arrow to the second system. The arrow says " +
+              "what moves along it.",
+            "Build the fixed model. Click a word, then click its box. Boxes 01 to 04 go " +
               "from cell to organ system. Box 05 is the second system.",
-            "Answer the arrow question.",
-            "In the last box, write three sentences, one for each mistake. Each sentence " +
-              "says what was wrong and why it is wrong.",
-            "Press Copy my model. Go back to the Canvas tab, click in the answer box for " +
-              "this question, and press Ctrl + V."],
+            "Answer the arrow question in the Model Builder.",
+            "In the last box, write three sentences, one for each mistake. In each " +
+              "sentence, say what was wrong and why it is wrong.",
+            "Press Copy my model. Then go back to the Canvas quiz. Click in the answer " +
+              "box for this question. Then press Ctrl + V."],
     directions: "",
     // Three mistakes, the same kinds as fr2 and fr2b: a cell part at the cell
     // level, the organ system level missing, and an unlabeled arrow.
@@ -556,8 +568,8 @@ const ITEMS = {
               "skeletal system"],
     twoWay: false,
     explainLinks: true,
-    prosePrompt: "Write three sentences, one for each mistake in the student model. " +
-      "Each sentence says what was wrong and why it is wrong.",
+    prosePrompt: "Write three sentences, one for each mistake in the student's model. " +
+      "In each sentence, say what was wrong and why it is wrong.",
     proseKey: "mistakes"
   }
 };
@@ -566,10 +578,10 @@ const ITEMS = {
 // `explainLinks` (teacher, 2026-10-14: the bare word "forms" left the
 // connection between levels too easy to misread).
 const LINKS = [
-  "many cells like this join to form the tissue below",
-  "this tissue joins with other tissues to form the organ below",
-  "this organ works as a team with other organs to form the organ system below",
-  "this system works with a second system: something moves between them"
+  "many cells like this one join together to make the tissue below",
+  "this tissue joins with other tissues to make the organ below",
+  "this organ teams up with other organs to make the organ system below",
+  "this system works with a second system, and something moves between them"
 ];
 
 const params = new URLSearchParams(location.search);
